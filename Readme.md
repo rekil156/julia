@@ -33,3 +33,53 @@ begin
     using PlutoUI
 end
 ```
+## Lesson1  
+* adding packages 
+```
+begin
+    import Pkg
+    Pkg.activate(mktempdir())
+end
+
+begin
+    Pkg.add(["Images", "ImageIO", "ImageMagick"])
+    using Images
+end
+```
+* writing multiple statements in a `begin-end` block 
+`a = begin b =1; c=4; b+c end`
+* typeof(image)
+* size(image)
+* reverse(image, dims =2)
+
+* img_copy = copy(image)
+* **BROADCASTING** 
+```
+begin 
+    new_img = copy(old_img)
+    new_img[100:200, 1:100] .= RGB(0, 1, 0)
+    new_img
+end
+```
+* **BROADCASTING FUNCTION**
+```
+# define a function that turns a colour into just its red component
+function redify(color)
+    return RGB(color.r, 0, 0)
+end
+
+redify.(image)
+```
+* Adding UI element 
+```
+begin
+    Pkg.add("PlutoUI")
+    using PlutoUI
+end 
+```
+adding a slider   
+```
+@bind deciamte_ratio Slider(1:10, show_value=true)
+decimate(img,deciamte_ratio)
+```
+
